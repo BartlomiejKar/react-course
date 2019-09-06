@@ -13,13 +13,20 @@
       src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
       crossorigin
     ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.8/uuid.min.js"
+      integrity="sha256-h7PiJxtxsf7+VkAGN6N+8/0qZrhK7oYJc/pguDnYJi4="
+      crossorigin="anonymous"
+    ></script>
     <title>apka react</title>
     <style>
       .App {
         font-family: sans-serif;
       }
 
-      .TimeboxEditor {
+      .TimeboxEditor,
+      .TimeboxCreator,
+      .Timebox {
         text-align: right;
         border: 1px solid gray;
         padding: 20px;
@@ -45,7 +52,7 @@
         font-size: 16px;
       }
 
-      .Timebox {
+      .CurrentTimebox {
         text-align: center;
         border: 1px solid gray;
         border-radius: 5px;
@@ -122,7 +129,7 @@
               onConfirm={this.handleChangeOnConfirm}
               Editable={isEditable}
             />
-            <Timebox
+            <CurrentTimebox
               changeEditable={this.handleChangeEditable}
               title={title}
               times={times}
@@ -175,7 +182,7 @@
       );
     }
 
-    class Timebox extends React.Component {
+    class CurrentTimebox extends React.Component {
       constructor(props) {
         super(props);
         this.state = {
@@ -188,6 +195,8 @@
         this.handleStart = this.handleStart.bind(this);
         this.handleStop = this.handleStop.bind(this);
         this.handlePause = this.handlePause.bind(this);
+        this.stopTimer = this.stopTimer.bind(this);
+        this.startTimer = this.startTimer.bind(this);
       }
 
       handleStart(event) {
@@ -221,6 +230,11 @@
       handlePause() {
         this.setState(function(prevState) {
           const isPaused = !prevState.isPaused;
+          if (isPaused) {
+            this.stopTimer();
+          } else {
+            this.startTimer();
+          }
           return {
             isPaused,
             pausesCount: isPaused
@@ -238,7 +252,7 @@
         const secondsLeft = Math.floor(timeLeftInSeconds % 60);
         const progressPercent = (timeInSeconds / totalTimesInSeconds) * 100;
         return (
-          <div className={`Timebox ${Editable ? "inactive" : ""}`}>
+          <div className={`CurrentTimebox ${Editable ? "inactive" : ""}`}>
             <h1>{title}</h1>
             <Clock
               minutes={minutesLeft}
@@ -269,7 +283,7 @@
       className = "",
       hours = 0,
       minutes = 0,
-      seconds,
+      seconds = 0,
       miliseconds = 0
     }) {
       return (
@@ -321,10 +335,104 @@
       );
     }
 
+    function TimeboxCreator(props) {
+      const { CreateTimebox } = props;
+      return (
+        <div className="TimeboxCreator">
+          <label>
+            Co robisz?
+            <input type="text" />
+          </label>{" "}
+          <br />
+          <label>
+            Ile minut?
+            <input type="number" />
+          </label>
+          <br />
+          <button className="TimeboxEditor_button" onClick={CreateTimebox}>
+            Dodaj nowy Timebox
+          </button>
+        </div>
+      );
+    }
+
+    class TimeboxList extends React.Component {
+      state = {
+        timeboxes: [
+          { id: uuid.v4(), title: "kurs React", totalTimes: 10 },
+          { id: uuid.v4(), title: "kontrolowanie komponentow", totalTimes: 15 },
+          { id: uuid.v4(), title: "przekazywanie stanu w gore", totalTimes: 20 }
+        ]
+      };
+      removeTimebox = indexToRemove => {
+        this.setState(prevState => {
+          const timeboxes = prevState.timeboxes.filter(
+            (item, index) => index !== indexToRemove
+          );
+          return { timeboxes };
+        });
+      };
+      addTimebox = item => {
+        this.setState(prevState => {
+          const timeboxes = [item, ...prevState.timeboxes];
+          return { timeboxes };
+        });
+      };
+      updateTimebox = (indexUptade, updateTimebox) => {
+        this.setState(prevState => {
+          const timeboxes = prevState.timeboxes.map((item, index) =>
+            index === indexUptade ? updateTimebox : item
+          );
+          return { timeboxes };
+        });
+      };
+
+      handleCreateTimebox = () => {
+        this.addTimebox({
+          id: uuid.v4(),
+          title: "nowy timebox",
+          totalTimes: 15
+        });
+      };
+      render() {
+        return (
+          <>
+            <TimeboxCreator CreateTimebox={this.handleCreateTimebox} />
+            {this.state.timeboxes.map((item, index) => (
+              <Timebox
+                key={item.id}
+                onEdit={() =>
+                  this.updateTimebox(index, {
+                    ...item,
+                    title: "update timebox"
+                  })
+                }
+                onDelete={() => this.removeTimebox(index)}
+                title={item.title}
+                totalTimes={item.totalTimes}
+              />
+            ))}
+          </>
+        );
+      }
+    }
+
+    function Timebox({ title, totalTimes, onEdit, onDelete, index }) {
+      return (
+        <div key={index} className="Timebox">
+          <h3>
+            {title} - {totalTimes}
+          </h3>
+          <button onClick={onEdit}>Edytuj</button>
+          <button onClick={onDelete}>Usun</button>
+        </div>
+      );
+    }
+
     function App() {
       return (
         <div className="App">
-          <EditorTimeable />
+          <TimeboxList />
         </div>
       );
     }
