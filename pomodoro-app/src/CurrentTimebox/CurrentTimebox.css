@@ -1,0 +1,15 @@
+.CurrentTimebox {
+    text-align: center;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+
+  }
+  .inactive {
+    filter: blur(2px) grayscale(1);
+  }
+
+  button {
+    margin-left: 20px;
+    font-size: 16px;
+  }

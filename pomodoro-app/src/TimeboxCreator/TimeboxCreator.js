@@ -1,4 +1,5 @@
 import React from 'react';
+import "../TimeboxCreator/TimeboxCreator.css"
 
 function TimeboxCreator(props) {
     const { CreateTimebox } = props;

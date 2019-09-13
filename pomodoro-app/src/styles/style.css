@@ -2,72 +2,18 @@
     font-family: sans-serif;
   }
 
-  .TimeboxEditor {
-    background-color: greenyellow;
-  }
 
-  .TimeboxCreator {
-    background-color: aqua;
-  }
 
-  .Timebox {
-    background-color: palegreen;
-  }
 
-  .TimeboxEditor,
-  .TimeboxCreator,
-  .Timebox {
-    text-align: right;
-    border: 1px solid gray;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-  }
+ 
 
-  .TimeboxEditor_button {
-    padding: 5px;
-    border-radius: 5px;
-  }
+  
+  
 
-  input {
-    margin: 1rem auto;
-    max-width: 60%;
-    width: 15em;
-    margin-left: 20px;
-    font-size: 16px;
-  }
+ 
+  
 
-  button {
-    margin-left: 20px;
-    font-size: 16px;
-  }
+  
 
-  .CurrentTimebox {
-    text-align: center;
-    border: 1px solid gray;
-    border-radius: 5px;
-    padding: 20px;
-
-  }
-
-  .Clock {
-    color: orange;
-  }
-
-  .ProgressBar {
-    height: 20px;
-    border: 1px solid orangered;
-    margin-bottom: 10px;
-    padding: 5px;
-    border-radius: 5px;
-  }
-
-  .ProgressBar>div {
-    background: red;
-    height: 100%;
-    float: right;
-  }
-
-  .inactive {
-    filter: blur(2px) grayscale(1);
-  }
+  
+  

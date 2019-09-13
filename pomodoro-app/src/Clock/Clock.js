@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Clock.css"
 function Clock({
     className = "",
     hours = 0,

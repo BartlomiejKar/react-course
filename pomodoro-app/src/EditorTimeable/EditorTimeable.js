@@ -1,6 +1,6 @@
 import React from 'react';
-import CurrentTimebox from "./CurrentTimebox"
-import TimeboxEditor from "./TimeboxEditor"
+import CurrentTimebox from "../CurrentTimebox/CurrentTimebox"
+import TimeboxEditor from "../TimeboxEditor/TimeboxEditor"
 class EditorTimeable extends React.Component {
     state = {
         title: "Uczę się Reacta",

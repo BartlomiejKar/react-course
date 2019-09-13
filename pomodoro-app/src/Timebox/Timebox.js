@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Timebox.css"
 
 function Timebox({ title, totalTimes, onEdit, onDelete, index }) {
     return (

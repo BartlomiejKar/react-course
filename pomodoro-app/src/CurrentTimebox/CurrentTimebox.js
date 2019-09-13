@@ -1,6 +1,7 @@
 import React from 'react';
-import Clock from "./Clock";
-import ProgressBar from "./ProgressBar"
+import Clock from "../Clock/Clock";
+import ProgressBar from "../ProgressBar/ProgressBar"
+import "./CurrentTimebox.css"
 class CurrentTimebox extends React.Component {
     constructor(props) {
         super(props);
