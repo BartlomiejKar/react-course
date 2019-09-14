@@ -33,12 +33,8 @@ class TimeboxList extends React.Component {
         });
     };
 
-    handleCreateTimebox = () => {
-        this.addTimebox({
-            id: uuid.v4(),
-            title: "nowy timebox",
-            totalTimes: 15
-        });
+    handleCreateTimebox = (item) => {
+        this.addTimebox(item)
     };
     render() {
         return (
