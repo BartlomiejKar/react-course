@@ -4,6 +4,10 @@ import TimeboxCreator from "../TimeboxCreator/TimeboxCreator";
 import Timebox from "../Timebox/Timebox"
 class TimeboxList extends React.Component {
     state = {
+        title: "",
+        totalTimeInMinutes: "",
+        isEditable: false,
+        indexOfEditedTimebox: "",
         timeboxes: [
             { id: uuid.v4(), title: "kurs React", totalTimes: 10 },
             { id: uuid.v4(), title: "kontrolowanie komponentow", totalTimes: 15 },
@@ -25,29 +29,42 @@ class TimeboxList extends React.Component {
         });
     };
     updateTimebox = (indexUptade, updateTimebox) => {
-        this.setState(prevState => {
-            const timeboxes = prevState.timeboxes.map((item, index) =>
-                index === indexUptade ? updateTimebox : item
-            );
-            return { timeboxes };
+        // this.setState(prevState => {
+        //     const timeboxes = prevState.timeboxes.map((item, index) =>
+        //         index === indexUptade ? updateTimebox : item
+        //     );
+        //     return { timeboxes };
+        this.setState({
+            isEditable: true,
+            title: updateTimebox.title,
+            totalTimeInMinutes: updateTimebox.totalTimeInMinutes,
+            indexOfEditedTimebox: indexUptade
         });
+
     };
 
     handleCreateTimebox = (item) => {
         this.addTimebox(item)
     };
     render() {
+        const { title, totalTimeInMinutes, isEditable, indexOfEditedTimebox } = this.state
         return (
             <>
-                <TimeboxCreator CreateTimebox={this.handleCreateTimebox} />
+                <TimeboxCreator
+                    CreateTimebox={this.handleCreateTimebox}
+                    title={title}
+                    totalTimeInMinutes={totalTimeInMinutes}
+                    isEditable={isEditable}
+                    indexOfEditedTimebox={indexOfEditedTimebox} />
                 {this.state.timeboxes.map((item, index) => (
                     <Timebox
                         key={item.id}
-                        onEdit={() =>
-                            this.updateTimebox(index, {
-                                ...item,
-                                title: "update timebox"
-                            })
+                        onEdit={(e) => {
+                            e.preventDefault()
+                            this.updateTimebox(index, item)
+                            console.log("klik", [index])
+                        }
+
                         }
                         onDelete={() => this.removeTimebox(index)}
                         title={item.title}
