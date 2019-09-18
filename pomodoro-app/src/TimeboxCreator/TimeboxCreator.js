@@ -31,7 +31,6 @@ class TimeboxCreator extends React.Component {
 
     }
     render() {
-        const { title, totalTimeInMinutes, isEditable, indexOfEditedTimebox } = this.props
         return (
             <form onSubmit={this.handleSubmit} className="TimeboxCreator">
                 <label>

@@ -6,3 +6,6 @@
     border-radius: 5px;
     background-color: palegreen;
   }
+  .Timebox__buttonConfirm {
+    display: none
+  }
