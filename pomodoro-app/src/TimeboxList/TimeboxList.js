@@ -4,7 +4,6 @@ import TimeboxCreator from "../TimeboxCreator/TimeboxCreator";
 import Timebox from "../Timebox/Timebox"
 class TimeboxList extends React.Component {
     state = {
-        disabledButton: false,
         timeboxes: [
             { id: uuid.v4(), title: "kurs React", totalTimes: 10 },
             { id: uuid.v4(), title: "kontrolowanie komponentow", totalTimes: 15 },
@@ -39,12 +38,8 @@ class TimeboxList extends React.Component {
     handleCreateTimebox = (item) => {
         this.addTimebox(item)
     };
-    handleDisabled = () => {
-        console.log("klik")
-        this.setState({
-            disabledButton: false
-        })
-    }
+
+
     render() {
 
         return (
@@ -54,21 +49,14 @@ class TimeboxList extends React.Component {
                 {this.state.timeboxes.map((item, index) => (
                     <Timebox
                         key={item.id}
-                        onEdit={(e) => {
-                            e.preventDefault()
-                            this.updateTimebox(index, item)
-                            console.log("klik", [index])
-                            this.setState({
-                                disabledButton: true
-                            })
-                        }
-
-                        }
+                        onEdit={this.updateTimebox}
                         onDelete={() => this.removeTimebox(index)}
                         title={item.title}
                         totalTimes={item.totalTimes}
                         confirmChanges={this.handleDisabled}
                         disabledButton={this.state.disabledButton}
+                        item={item}
+                        index={index}
                     />
                 ))}
             </>

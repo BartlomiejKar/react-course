@@ -1,39 +1,41 @@
 import React from 'react';
-import "./Timebox.css"
+import "./Timebox.css";
+import EditForm from "../EditForm/EditForm"
 
 class Timebox extends React.Component {
     state = {
-        title: "",
-        totalTimes: ""
+        disabledButton: true,
+        formIsVisible: false
     }
-    handleChangeTitle = (e) => {
+    formIsVisible = () => {
         this.setState({
-            title: e.target.value
+            formIsVisible: true
         })
     }
-    handleChangeTimes = (e) => {
+    confirmChanges = (e) => {
         this.setState({
-            totalTimes: e.target.value
+            formIsVisible: false
         })
     }
+
     render() {
-        const { title, totalTimes, onEdit, onDelete, index, confirmChanges, disabledButton } = this.props
+
+        const { title, totalTimes, onEdit, onDelete, index, item } = this.props
         return (
             <div key={index} className="Timebox">
                 <h3>
                     {title} - {`${totalTimes} min`}
                 </h3>
-                <button onClick={onEdit}>Edytuj</button>
+                <button onClick={this.formIsVisible} >Edytuj</button>
                 <button onClick={onDelete}>Usun</button>
-                <button className={disabledButton ? "" : "Timebox__buttonConfirm"} disabled={!disabledButton} onClick={confirmChanges}>Zatwierdź zmiany</button>
-                <form className={disabledButton ? "" : "Timebox__formEdit"}>
-                    <label> Co robisz
-                        <input defaultValue={this.state.title} onChange={this.state.handleChangeTitle} type="text" />
-                    </label>
-                    <label> ile minut
-                        <input defaultValue={this.state.totalTimes} onChange={this.state.handleChangeTimes} type="number" />
-                    </label>
-                </form>
+                <EditForm
+                    formIsVisible={this.state.formIsVisible}
+                    confirmChanges={this.confirmChanges}
+                    onEdit={onEdit}
+                    title={title}
+                    totalTimes={totalTimes}
+                    index={index}
+                    item={item} />
             </div>
         );
     }
