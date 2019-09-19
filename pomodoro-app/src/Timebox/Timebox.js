@@ -32,8 +32,6 @@ class Timebox extends React.Component {
                     formIsVisible={this.state.formIsVisible}
                     confirmChanges={this.confirmChanges}
                     onEdit={onEdit}
-                    title={title}
-                    totalTimes={totalTimes}
                     index={index}
                     item={item} />
             </div>
