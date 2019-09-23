@@ -6,8 +6,10 @@ import "../src/styles/style.css"
 function App() {
     return (
         <div className="App">
-            <TimeboxList />
-            <EditorTimeable />
+            <React.StrictMode>
+                <TimeboxList />
+                <EditorTimeable />
+            </React.StrictMode>
         </div>
     );
 }
