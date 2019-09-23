@@ -7,6 +7,7 @@ class EditorTimeable extends React.Component {
         times: "20",
         isEditable: true
     };
+
     handleChangeTitle = e => {
         this.setState({
             title: e.target.value
@@ -32,20 +33,23 @@ class EditorTimeable extends React.Component {
         const { title, times, isEditable } = this.state;
         return (
             <>
-                <TimeboxEditor
-                    title={title}
-                    times={times}
-                    onChangeTitle={this.handleChangeTitle}
-                    onChangeTimes={this.handleChangeTimes}
-                    onConfirm={this.handleChangeOnConfirm}
-                    Editable={isEditable}
-                />
-                <CurrentTimebox
-                    changeEditable={this.handleChangeEditable}
-                    title={title}
-                    times={times}
-                    Editable={isEditable}
-                />
+                {isEditable ? (
+                    <TimeboxEditor
+                        title={title}
+                        times={times}
+                        onChangeTitle={this.handleChangeTitle}
+                        onChangeTimes={this.handleChangeTimes}
+                        onConfirm={this.handleChangeOnConfirm}
+                        Editable={isEditable}
+                    />) : (
+                        <CurrentTimebox
+                            changeEditable={this.handleChangeEditable}
+                            title={title}
+                            times={times}
+                            Editable={isEditable}
+                        />
+                    )
+                }
             </>
         );
     }
