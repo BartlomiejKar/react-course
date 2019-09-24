@@ -17,6 +17,7 @@ class CurrentTimebox extends React.Component {
         this.handlePause = this.handlePause.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
         this.startTimer = this.startTimer.bind(this);
+        this.IntervalId = null;
     }
     componentWillUnmount() {
         this.stopTimer()
@@ -40,17 +41,19 @@ class CurrentTimebox extends React.Component {
     }
 
     startTimer() {
-
-        this.IntervalId = window.setInterval(() => {
-            console.log("liczy")
-            this.setState(prevState => ({
-                timeInSeconds: prevState.timeInSeconds + 0.1
-            }));
-        }, 100);
+        if (this.IntervalId === null) {
+            this.IntervalId = window.setInterval(() => {
+                console.log("liczy")
+                this.setState(prevState => ({
+                    timeInSeconds: prevState.timeInSeconds + 0.1
+                }));
+            }, 100);
+        }
     }
 
     stopTimer() {
         window.clearInterval(this.IntervalId);
+        this.IntervalId = null
     }
 
     handlePause() {
