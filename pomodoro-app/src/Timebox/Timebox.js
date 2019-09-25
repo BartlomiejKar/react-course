@@ -1,6 +1,7 @@
 import React from 'react';
 import "./Timebox.css";
 import EditForm from "../EditForm/EditForm"
+import propTypes from "prop-types"
 
 class Timebox extends React.Component {
     state = {
@@ -38,6 +39,12 @@ class Timebox extends React.Component {
         );
     }
 };
+
+Timebox.propTypes = {
+    title: propTypes.string,
+    totalTimes: propTypes.number,
+
+}
 
 export default Timebox;
 
