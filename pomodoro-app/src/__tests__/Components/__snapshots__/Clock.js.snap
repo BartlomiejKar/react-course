@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Clock/> when gives minutes and seconds(react-test-renderer) renders properly 1`] = `
+<h2
+  className="Clock "
+>
+  Pozostało 
+  00
+  :
+  20
+  :
+  10
+  :
+  00
+</h2>
+`;
