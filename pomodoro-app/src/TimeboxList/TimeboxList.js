@@ -13,16 +13,25 @@ function wait(ms = 1000) {
     )
 }
 
-async function getAllTimeboxes() {
+const timeboxes = [
+    { "id": uuid.v4(), "title": "kurs React", "totalTimes": 10 },
+    { "id": uuid.v4(), "title": "kontrolowanie komponentow", "totalTimes": 15 },
+    { "id": uuid.v4(), "title": "przekazywanie stanu w gore", "totalTimes": 20 }
+]
 
-    await wait(1000);
-    new Error("Something goes wrong");
-    return [
-        { "id": uuid.v4(), "title": "kurs React", "totalTimes": 10 },
-        { "id": uuid.v4(), "title": "kontrolowanie komponentow", "totalTimes": 15 },
-        { "id": uuid.v4(), "title": "przekazywanie stanu w gore", "totalTimes": 20 }
-    ]
-};
+
+const timeboxesAPI = {
+    getAllTimeboxes: async function () {
+        await wait(1000);
+        return [...timeboxes]
+    },
+    addTimebox: async function (timeboxToAdd) {
+        await wait(1000);
+        const addedTimebox = { ...timeboxToAdd, id: uuid.v4(), }
+        timeboxes.push(addedTimebox)
+    }
+
+}
 
 class TimeboxList extends React.Component {
     state = {
@@ -32,7 +41,7 @@ class TimeboxList extends React.Component {
     }
 
     componentDidMount() {
-        getAllTimeboxes()
+        timeboxesAPI.getAllTimeboxes()
             .then((timeboxes) => this.setState({ timeboxes }))
             .catch(
                 (error) => (this.setState({ error }))
@@ -53,10 +62,14 @@ class TimeboxList extends React.Component {
         });
     };
     addTimebox = item => {
-        this.setState(prevState => {
-            const timeboxes = [item, ...prevState.timeboxes];
-            return { timeboxes };
-        });
+        timeboxesAPI.addTimebox(item)
+            .then((addedTimebox) => {
+                this.setState(prevState => {
+                    const timeboxes = [item, ...prevState.timeboxes];
+                    return { timeboxes };
+                })
+            }
+            )
     };
     updateTimebox = (indexUptade, updateTimebox) => {
         this.setState(prevState => {
