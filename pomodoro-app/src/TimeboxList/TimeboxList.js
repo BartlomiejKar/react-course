@@ -16,7 +16,7 @@ function wait(ms = 1000) {
 async function getAllTimeboxes() {
 
     await wait(1000);
-    Error("Something goes wrong");
+    new Error("Something goes wrong");
     return [
         { "id": uuid.v4(), "title": "kurs React", "totalTimes": 10 },
         { "id": uuid.v4(), "title": "kontrolowanie komponentow", "totalTimes": 15 },
@@ -35,7 +35,7 @@ class TimeboxList extends React.Component {
         getAllTimeboxes()
             .then((timeboxes) => this.setState({ timeboxes }))
             .catch(
-                (error) => Promise.reject(this.setState({ error }))
+                (error) => (this.setState({ error }))
             )
             .finally(
                 () => this.setState({
@@ -81,6 +81,7 @@ class TimeboxList extends React.Component {
                 <TimeboxCreator
                     CreateTimebox={this.handleCreateTimebox} />
                 {this.state.loading ? "Ładuję listę zadań" : null}
+                {this.state.error ? "Coś poszło nie tak" : null}
                 {this.state.timeboxes.map((item, index) => (
                     <Timebox
                         key={item.id}
