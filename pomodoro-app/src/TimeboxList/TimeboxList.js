@@ -2,14 +2,48 @@ import React from 'react';
 import uuid from "uuid";
 import TimeboxCreator from "../TimeboxCreator/TimeboxCreator";
 import Timebox from "../Timebox/Timebox"
+
+
+
+function wait(ms = 1000) {
+    return new Promise(
+        (resolve) => {
+            setTimeout(resolve, ms)
+        }
+    )
+}
+
+async function getAllTimeboxes() {
+
+    await wait(1000);
+    Error("Something goes wrong");
+    return [
+        { "id": uuid.v4(), "title": "kurs React", "totalTimes": 10 },
+        { "id": uuid.v4(), "title": "kontrolowanie komponentow", "totalTimes": 15 },
+        { "id": uuid.v4(), "title": "przekazywanie stanu w gore", "totalTimes": 20 }
+    ]
+};
+
 class TimeboxList extends React.Component {
     state = {
-        timeboxes: [
-            { id: uuid.v4(), title: "kurs React", totalTimes: 10 },
-            { id: uuid.v4(), title: "kontrolowanie komponentow", totalTimes: 15 },
-            { id: uuid.v4(), title: "przekazywanie stanu w gore", totalTimes: 20 }
-        ]
-    };
+        timeboxes: [],
+        loading: true,
+        error: null
+    }
+
+    componentDidMount() {
+        getAllTimeboxes()
+            .then((timeboxes) => this.setState({ timeboxes }))
+            .catch(
+                (error) => Promise.reject(this.setState({ error }))
+            )
+            .finally(
+                () => this.setState({
+                    loading: false
+                }))
+
+
+    }
     removeTimebox = indexToRemove => {
         this.setState(prevState => {
             const timeboxes = prevState.timeboxes.filter(
@@ -46,6 +80,7 @@ class TimeboxList extends React.Component {
             <>
                 <TimeboxCreator
                     CreateTimebox={this.handleCreateTimebox} />
+                {this.state.loading ? "Ładuję listę zadań" : null}
                 {this.state.timeboxes.map((item, index) => (
                     <Timebox
                         key={item.id}
