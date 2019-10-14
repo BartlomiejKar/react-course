@@ -17,9 +17,7 @@ const FetchApiTimeboxes = {
     replaceTimebox: async function (timeboxToReplace) {
         if (!timeboxToReplace.id) {
             new Error("błędne id timeboxa")
-
         }
-
         const response = await makeRequest(`${URL}/${timeboxToReplace.id}`, "PUT", timeboxToReplace)
         const replacedTimebox = await response.json()
         return replacedTimebox
