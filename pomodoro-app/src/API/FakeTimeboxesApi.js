@@ -25,7 +25,7 @@ function findIndexByAnyId(id) {
 const FakeTimeboxesAPI = {
     getAllTimeboxes: async function () {
         await wait(1000);
-        console.log("GET all", timeboxes)
+        console.log("GET", timeboxes)
         return [...timeboxes]
 
     },
@@ -33,7 +33,7 @@ const FakeTimeboxesAPI = {
         await wait(1000);
         const addedTimebox = { ...timeboxToAdd, id: uuid.v4(), }
         timeboxes.push(addedTimebox)
-        console.log("post", timeboxes)
+        console.log("POST", timeboxes)
     },
     replaceTimebox: async function (timeboxToReplace) {
         await wait(500);
@@ -43,7 +43,7 @@ const FakeTimeboxesAPI = {
         const index = findIndexByAnyId(timeboxToReplace.id)
         const replacedTimebox = { ...timeboxToReplace }
         timeboxes[index] = replacedTimebox
-        console.log("put", timeboxes)
+        console.log("PUT", timeboxes)
         return replacedTimebox
     },
     removeTimebox: async function (timeboxToRemove) {
@@ -53,7 +53,7 @@ const FakeTimeboxesAPI = {
         }
         const index = findIndexByAnyId(timeboxToRemove.id)
         timeboxes.splice(index, 1)
-        console.log("delete", timeboxes)
+        console.log("DELETE", timeboxes)
 
 
     }
