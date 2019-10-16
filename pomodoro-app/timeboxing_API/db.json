@@ -1,29 +1,16 @@
 {
+  "users": [
+    {
+      "email": "bolo@wp.pl",
+      "password": "$2a$10$.11Jd1HbsfPC6kKrS8zkVeqpjg8y2yzxLeUffzY1nCBY6JdAnfvGq",
+      "id": 1
+    }
+  ],
   "timeboxes": [
-    {
-      "id": 3,
-      "title": "dasssssssss",
-      "totalTimes": "234124"
-    },
-    {
-      "id": "4274c4f7-3af4-4589-b6ab-5d3ad8c58343",
-      "title": "33",
-      "totalTimes": "1"
-    },
-    {
-      "id": "da286aa5-127e-4e37-b5f4-bf4932daa44f",
-      "title": "da",
-      "totalTimes": "2"
-    },
     {
       "id": "eefb1a66-2771-44ae-8f55-8205a891915e",
       "title": "dvas",
       "totalTimes": "23"
-    },
-    {
-      "id": "120f4819-d730-458a-9274-0bc056f349f3",
-      "title": "ćą",
-      "totalTimes": "2"
     }
   ]
 }
