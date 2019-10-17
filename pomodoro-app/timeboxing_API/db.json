@@ -8,9 +8,29 @@
   ],
   "timeboxes": [
     {
-      "id": "eefb1a66-2771-44ae-8f55-8205a891915e",
-      "title": "dvas",
-      "totalTimes": "23"
+      "id": 1,
+      "title": "kurs React",
+      "totalTimes": 10
+    },
+    {
+      "id": 2,
+      "title": "kontrolowanie komponentow",
+      "totalTimes": 15
+    },
+    {
+      "id": 3,
+      "title": "przekazywanie stanu w gore",
+      "totalTimes": 20
+    },
+    {
+      "title": "nowy",
+      "totalTimes": 15,
+      "id": 4
+    },
+    {
+      "title": "nowy2",
+      "totalTimes": 15,
+      "id": 5
     }
   ]
 }
