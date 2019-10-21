@@ -1,0 +1,9 @@
+.Header__email {
+display: flex;
+justify-content: flex-end;
+padding: 5px;
+margin: 10px
+}
+.Header__email-link {
+    margin-left: 5px
+}
