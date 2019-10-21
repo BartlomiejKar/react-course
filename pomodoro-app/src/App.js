@@ -9,8 +9,13 @@ import AuthenticationApi from "./API/FetchAuthentiactionApi"
 
 class App extends React.Component {
 
+    state = {
+        accesToken: null,
+        previousLoginAttempt: false
+    }
+
     isLogged() {
-        return false
+        return !!this.state.accesToken
     }
 
     getUserEmail = () => {
@@ -19,14 +24,19 @@ class App extends React.Component {
 
     handleLoginAttempt = (credentials) => {
         AuthenticationApi.login(credentials)
-            .then((result) => {
-                console.log("login result", result)
-            })
-            .catch(() => {
-                console.log("błąd")
-            })
+            .then((accesToken) => {
+                this.setState({
+                    accesToken,
+                    previousLoginAttempt: false
+                }).catch(() => {
+                    this.setState({
+                        previousLoginAttempt: true
+                    })
+                })
 
-        console.log("Login attempt")
+
+                console.log("Login attempt", credentials)
+            })
     }
 
 
@@ -36,7 +46,7 @@ class App extends React.Component {
     }
     render() {
         return (
-            <div className="App">
+            <div className="App" >
                 <ErrorBoundaries message="Nie działa cała aplikacja">
                     {
                         this.isLogged() ?
@@ -51,7 +61,7 @@ class App extends React.Component {
                                 </React.StrictMode>
                             </> :
                             <div><LoginForm
-                                errorMessage="Nie udało się zalogować"
+                                errorMessage={this.state.previousLoginAttempt ? "Nie udało się zalogować" : null}
                                 onLoginAttempt={this.handleLoginAttempt} /></div>
 
                     }

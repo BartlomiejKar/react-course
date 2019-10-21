@@ -4,6 +4,11 @@
       "email": "bolo@wp.pl",
       "password": "$2a$10$.11Jd1HbsfPC6kKrS8zkVeqpjg8y2yzxLeUffzY1nCBY6JdAnfvGq",
       "id": 1
+    },
+    {
+      "email": "bob@example.com",
+      "password": "$2a$10$4ia5VeCAS4y.xEqwHtDyDedEmBZNa6iySraC8sPbiQ2o7rYJm1y9q",
+      "id": 2
     }
   ],
   "timeboxes": [

@@ -20,7 +20,10 @@ class LoginForm extends React.Component {
     render() {
         return (
             <form className="LoginForm" onSubmit={this.handleSubmit}>
-                <div className="LoginForm__errorMessage">{this.props.errorMessage}</div>
+                {this.props.errorMessage ?
+                    <div className="LoginForm__errorMessage">{this.props.errorMessage}</div>
+                    : <></>
+                }
                 <label>
                     Podaj email
 <input ref={this.email} defaultValue="bob@example.com" type="email" />
