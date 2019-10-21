@@ -1,7 +1,7 @@
-const URL = `http://localhost:3006/`
+const URL = `http://localhost:3006`
 const FetchAuthenticationApi = {
 
-    addTimebox: async function (credentials) {
+    login: async function (credentials) {
         const response = await makeRequest(`${URL}/login`, "POST", credentials)
         const result = await response.json()
         return result
