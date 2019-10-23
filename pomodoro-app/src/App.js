@@ -6,6 +6,7 @@ import ErrorBoundaries from "../src/ErrorBoundaries/ErrorBoundaries"
 import "./App.css"
 import LoginForm from "./LoginForm/LoginForm"
 import AuthenticationApi from "./API/FetchAuthentiactionApi"
+import jwt from "jsonwebtoken"
 
 class App extends React.Component {
 
@@ -19,19 +20,17 @@ class App extends React.Component {
     }
 
     getUserEmail = () => {
-        return "example@example.pl"
+        const decodeToken = jwt.decode(this.state.accesToken)
+        return decodeToken
     }
 
     handleLoginAttempt = (credentials) => {
+
         AuthenticationApi.login(credentials)
             .then((accesToken) => {
                 this.setState({
                     accesToken,
                     previousLoginAttempt: false
-                }).catch(() => {
-                    this.setState({
-                        previousLoginAttempt: true
-                    })
                 })
 
 
@@ -56,7 +55,7 @@ class App extends React.Component {
                                     <a onClick={this.logoutUser} className="Header__email-link" href="/#">wyloguj się</a>
                                 </header>
                                 <React.StrictMode>
-                                    <TimeboxList />
+                                    <TimeboxList accesToken={this.state.accesToken} />
                                     <EditorTimeable />
                                 </React.StrictMode>
                             </> :

@@ -9,6 +9,11 @@
       "email": "bob@example.com",
       "password": "$2a$10$4ia5VeCAS4y.xEqwHtDyDedEmBZNa6iySraC8sPbiQ2o7rYJm1y9q",
       "id": 2
+    },
+    {
+      "email": "bolo@example.com",
+      "password": "$2a$10$p6dpQpM9gqAe5sSVYg.FvuxY8dmGz/r2V8YJfkgaxcsu8y0qHLmp.",
+      "id": 3
     }
   ],
   "timeboxes": [

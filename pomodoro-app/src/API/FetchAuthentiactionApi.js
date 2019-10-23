@@ -1,4 +1,4 @@
-const URL = `http://localhost:3006`
+const URL = "http://localhost:3006"
 const FetchAuthenticationApi = {
 
     login: async function (credentials) {
@@ -13,9 +13,9 @@ const FetchAuthenticationApi = {
 
 export default FetchAuthenticationApi;
 
-async function makeRequest(url, method, body) {
-    const jsonBody = body ? JSON.stringify(body) : undefined
-    const response = await window.fetch(url, {
+async function makeRequest(URL, method, body) {
+    const jsonBody = body ? JSON.stringify(body) : undefined;
+    const response = await window.fetch(URL, {
         method,
         headers: {
             "Content-Type": "applications/json"

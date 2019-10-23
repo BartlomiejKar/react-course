@@ -26,12 +26,12 @@ class LoginForm extends React.Component {
                 }
                 <label>
                     Podaj email
-<input ref={this.email} defaultValue="bob@example.com" type="email" />
+<input ref={this.email} defaultValue="bolo@example.com" type="email" />
                 </label>
                 <br />
                 <label>
                     Podaj hasło
-<input ref={this.password} defaultValue="secret" type="password" />
+<input ref={this.password} defaultValue="qwerty" type="password" />
                 </label>
                 <br />
                 <button className="" >
