@@ -3,18 +3,18 @@ import "./LoginForm.scss"
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
-        this.email = React.createRef();
-        this.password = React.createRef();
+        this.emailInput = React.createRef();
+        this.passwordInput = React.createRef();
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.onLoginAttempt({
-            email: this.email.current.value,
-            password: this.password.current.value
+            email: this.emailInput.current.value,
+            password: this.passwordInput.current.value
         });
-        this.email.current.value = ""
-        this.password.current.value = ""
+        this.emailInput.current.value = ""
+        this.passwordInput.current.value = ""
 
     }
     render() {
@@ -26,12 +26,12 @@ class LoginForm extends React.Component {
                 }
                 <label>
                     Podaj email
-<input ref={this.email} defaultValue="bolo@example.com" type="email" />
+<input ref={this.emailInput} defaultValue="bolo@example.pl" type="email" />
                 </label>
                 <br />
                 <label>
                     Podaj hasło
-<input ref={this.password} defaultValue="qwerty" type="password" />
+<input ref={this.passwordInput} defaultValue="qwerty" type="password" />
                 </label>
                 <br />
                 <button className="" >

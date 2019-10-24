@@ -25,17 +25,21 @@ class App extends React.Component {
     }
 
     handleLoginAttempt = (credentials) => {
-
         AuthenticationApi.login(credentials)
-            .then((accesToken) => {
-                this.setState({
-                    accesToken,
-                    previousLoginAttempt: false
-                })
-
-
-                console.log("Login attempt", credentials)
+            .then((result) => {
+                console.log("result", result)
             })
+        // AuthenticationApi.login(credentials)
+        //     .then((accesToken) => {
+        //         this.setState({
+        //             accesToken,
+        //             previousLoginAttempt: false
+        //         })
+
+
+        //         console.log("Login attempt", credentials)
+        //     })
+        console.log("Login attempt", credentials)
     }
 
 

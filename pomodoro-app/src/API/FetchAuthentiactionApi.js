@@ -3,8 +3,8 @@ const FetchAuthenticationApi = {
 
     login: async function (credentials) {
         const response = await makeRequest(`${URL}/login`, "POST", credentials)
-        const result = await response.json()
-        return result
+        const result = await response.json();
+        return result;
     }
 
 }
