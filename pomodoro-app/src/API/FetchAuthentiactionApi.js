@@ -18,7 +18,7 @@ async function makeRequest(URL, method, body) {
     const response = await window.fetch(URL, {
         method,
         headers: {
-            "Content-Type": "applications/json"
+            "Content-Type": "application/json"
         },
         body: jsonBody
     })
