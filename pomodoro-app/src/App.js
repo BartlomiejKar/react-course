@@ -21,14 +21,13 @@ class App extends React.Component {
     }
 
     getUserEmail = () => {
-        const decodeToken = jwt.decode(this.state.accesToken)
-        return decodeToken
+        const decodeToken = jwt.decode(this.state.accessToken)
+        return decodeToken.email
     }
 
     handleLoginAttempt = (credentials) => {
         FetchApi.login(credentials)
             .then(({ accessToken }) => {
-                console.log("accesstoken", accessToken)
                 this.setState({
                     accessToken,
                     previousLoginAttempt: false
