@@ -7,8 +7,8 @@ class LoginForm extends React.Component {
         this.passwordInput = React.createRef();
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault()
+    handleSubmit = (event) => {
+        event.preventDefault()
         this.props.onLoginAttempt({
             email: this.emailInput.current.value,
             password: this.passwordInput.current.value

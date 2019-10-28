@@ -5,18 +5,19 @@ import "../src/styles/style.css"
 import ErrorBoundaries from "../src/ErrorBoundaries/ErrorBoundaries"
 import "./App.css"
 import LoginForm from "./LoginForm/LoginForm"
-import AuthenticationApi from "./API/FetchAuthentiactionApi"
+import FetchApi from "./API/FetchAuthentiactionApi"
 import jwt from "jsonwebtoken"
 
 class App extends React.Component {
 
     state = {
-        accesToken: null,
+        accessToken: null,
         previousLoginAttempt: false
     }
 
     isLogged() {
-        return !!this.state.accesToken
+        return !!this.state.accessToken;
+
     }
 
     getUserEmail = () => {
@@ -25,27 +26,29 @@ class App extends React.Component {
     }
 
     handleLoginAttempt = (credentials) => {
-        AuthenticationApi.login(credentials)
-            .then((result) => {
-                console.log("result", result)
+        FetchApi.login(credentials)
+            .then(({ accessToken }) => {
+                console.log("accesstoken", accessToken)
+                this.setState({
+                    accessToken,
+                    previousLoginAttempt: false
+                })
+            }).catch(() => {
+                this.setState({
+                    previousLoginAttempt: true
+                })
+                console.log("catch źle")
             })
-        // AuthenticationApi.login(credentials)
-        //     .then((accesToken) => {
-        //         this.setState({
-        //             accesToken,
-        //             previousLoginAttempt: false
-        //         })
-
-
-        //         console.log("Login attempt", credentials)
-        //     })
-        console.log("Login attempt", credentials)
     }
 
 
 
     logoutUser = () => {
         console.log("Wylogowane")
+        this.setState({
+            accessToken: null,
+            previousLoginAttempt: false
+        })
     }
     render() {
         return (
@@ -59,7 +62,7 @@ class App extends React.Component {
                                     <a onClick={this.logoutUser} className="Header__email-link" href="/#">wyloguj się</a>
                                 </header>
                                 <React.StrictMode>
-                                    <TimeboxList accesToken={this.state.accesToken} />
+                                    <TimeboxList />
                                     <EditorTimeable />
                                 </React.StrictMode>
                             </> :
