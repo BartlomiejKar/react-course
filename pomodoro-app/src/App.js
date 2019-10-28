@@ -61,7 +61,7 @@ class App extends React.Component {
                                     <a onClick={this.logoutUser} className="Header__email-link" href="/#">wyloguj się</a>
                                 </header>
                                 <React.StrictMode>
-                                    <TimeboxList />
+                                    <TimeboxList accessToken={this.state.accessToken} />
                                     <EditorTimeable />
                                 </React.StrictMode>
                             </> :
