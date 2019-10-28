@@ -1,12 +1,10 @@
 import React from 'react';
-import TimeboxList from "./TimeboxList/TimeboxList";
-import EditorTimeable from "./EditorTimeable/EditorTimeable"
 import "../src/styles/style.css"
 import ErrorBoundaries from "../src/ErrorBoundaries/ErrorBoundaries"
 import "./App.css"
 import LoginForm from "./LoginForm/LoginForm"
 import FetchApi from "./API/FetchAuthentiactionApi"
-import jwt from "jsonwebtoken"
+import AuthenticatedApp from "./AuthenticatedApp";
 
 class App extends React.Component {
 
@@ -18,11 +16,6 @@ class App extends React.Component {
     isLogged() {
         return !!this.state.accessToken;
 
-    }
-
-    getUserEmail = () => {
-        const decodeToken = jwt.decode(this.state.accessToken)
-        return decodeToken.email
     }
 
     handleLoginAttempt = (credentials) => {
@@ -56,14 +49,8 @@ class App extends React.Component {
                     {
                         this.isLogged() ?
                             <>
-                                <header className="Header__email">
-                                    Witaj {this.getUserEmail()}
-                                    <a onClick={this.logoutUser} className="Header__email-link" href="/#">wyloguj się</a>
-                                </header>
-                                <React.StrictMode>
-                                    <TimeboxList accessToken={this.state.accessToken} />
-                                    <EditorTimeable />
-                                </React.StrictMode>
+                                <AuthenticatedApp accessToken={this.state.accessToken} logoutUser={this.logoutUser} />
+
                             </> :
                             <div><LoginForm
                                 errorMessage={this.state.previousLoginAttempt ? "Nie udało się zalogować" : null}

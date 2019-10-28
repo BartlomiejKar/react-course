@@ -11,5 +11,11 @@
       "id": 2
     }
   ],
-  "timeboxes": []
+  "timeboxes": [
+    {
+      "id": "cd4a6dac-a1ae-448e-84b4-54b80560a84e",
+      "title": "ble ",
+      "totalTimes": "123"
+    }
+  ]
 }
