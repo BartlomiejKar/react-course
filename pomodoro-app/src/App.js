@@ -5,6 +5,7 @@ import "./App.css"
 import LoginForm from "./LoginForm/LoginForm"
 import FetchApi from "./API/FetchAuthentiactionApi"
 import AuthenticatedApp from "./AuthenticatedApp";
+import AuthenticationContext from "./contexts/AuthenticationContext"
 
 class App extends React.Component {
 
@@ -48,10 +49,10 @@ class App extends React.Component {
                 <ErrorBoundaries message="Nie działa cała aplikacja">
                     {
                         this.isLogged() ?
-                            <>
-                                <AuthenticatedApp accessToken={this.state.accessToken} logoutUser={this.logoutUser} />
+                            <AuthenticationContext.Provider value={{ accessToken: this.state.accessToken }}>
+                                <AuthenticatedApp logoutUser={this.logoutUser} />
 
-                            </> :
+                            </AuthenticationContext.Provider> :
                             <div><LoginForm
                                 errorMessage={this.state.previousLoginAttempt ? "Nie udało się zalogować" : null}
                                 onLoginAttempt={this.handleLoginAttempt} /></div>
@@ -59,7 +60,7 @@ class App extends React.Component {
                     }
 
                 </ErrorBoundaries>
-            </div>
+            </div >
         );
     }
 }
