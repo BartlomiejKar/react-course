@@ -50,15 +50,13 @@ class App extends React.Component {
                     {
                         this.isLogged() ?
                             <AuthenticationContext.Provider value={{ accessToken: this.state.accessToken, logoutUser: this.logoutUser }}>
-                                <AuthenticatedApp logoutUser={this.logoutUser} />
-
+                                <AuthenticatedApp />
                             </AuthenticationContext.Provider> :
                             <div><LoginForm
                                 errorMessage={this.state.previousLoginAttempt ? "Nie udało się zalogować" : null}
-                                onLoginAttempt={this.handleLoginAttempt} /></div>
-
+                                onLoginAttempt={this.handleLoginAttempt} />
+                            </div>
                     }
-
                 </ErrorBoundaries>
             </div >
         );

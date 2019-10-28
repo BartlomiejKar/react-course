@@ -3,12 +3,11 @@ import TimeboxList from "./TimeboxList/TimeboxList";
 import EditorTimeable from "./EditorTimeable/EditorTimeable"
 import Header from "./Header"
 
-function AuthenticatedApp({ accessToken, logoutUser }) {
+function AuthenticatedApp() {
     return <>
-        <Header accessToken={accessToken} logoutUser={logoutUser} />
+        <Header />
         <React.StrictMode>
-
-            <TimeboxList accessToken={accessToken} />
+            <TimeboxList />
             <EditorTimeable />
         </React.StrictMode>
     </>
