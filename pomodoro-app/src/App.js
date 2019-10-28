@@ -4,8 +4,9 @@ import ErrorBoundaries from "../src/ErrorBoundaries/ErrorBoundaries"
 import "./App.css"
 import LoginForm from "./LoginForm/LoginForm"
 import FetchApi from "./API/FetchAuthentiactionApi"
-import AuthenticatedApp from "./AuthenticatedApp";
 import AuthenticationContext from "./contexts/AuthenticationContext"
+
+const AuthenticatedApp = React.lazy(() => import("./AuthenticatedApp"));
 
 class App extends React.Component {
 
@@ -50,7 +51,9 @@ class App extends React.Component {
                     {
                         this.isLogged() ?
                             <AuthenticationContext.Provider value={{ accessToken: this.state.accessToken, logoutUser: this.logoutUser }}>
-                                <AuthenticatedApp />
+                                <React.Suspense fallback={<div>Loading...</div>}>
+                                    <AuthenticatedApp />
+                                </React.Suspense>
                             </AuthenticationContext.Provider> :
                             <div><LoginForm
                                 errorMessage={this.state.previousLoginAttempt ? "Nie udało się zalogować" : null}
