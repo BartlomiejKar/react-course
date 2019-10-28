@@ -49,7 +49,7 @@ class App extends React.Component {
                 <ErrorBoundaries message="Nie działa cała aplikacja">
                     {
                         this.isLogged() ?
-                            <AuthenticationContext.Provider value={{ accessToken: this.state.accessToken }}>
+                            <AuthenticationContext.Provider value={{ accessToken: this.state.accessToken, logoutUser: this.logoutUser }}>
                                 <AuthenticatedApp logoutUser={this.logoutUser} />
 
                             </AuthenticationContext.Provider> :
