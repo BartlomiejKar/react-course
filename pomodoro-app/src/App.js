@@ -51,7 +51,7 @@ class App extends React.Component {
                     {
                         this.isLogged() ?
                             <AuthenticationContext.Provider value={{ accessToken: this.state.accessToken, logoutUser: this.logoutUser }}>
-                                <React.Suspense fallback={<div>Loading...</div>}>
+                                <React.Suspense fallback={"Loading..."}>
                                     <AuthenticatedApp />
                                 </React.Suspense>
                             </AuthenticationContext.Provider> :
