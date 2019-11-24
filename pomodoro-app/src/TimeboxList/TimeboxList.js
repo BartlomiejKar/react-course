@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useReducer } from 'react';
 
 import TimeboxCreator from "../TimeboxCreator/TimeboxCreator";
-import Timebox from "../Timebox/Timebox"
+import TaskList from "../TimeboxList/TaskList"
 import timeboxesAPI from "../API/FetchApiTimeboxes"
 import AuthenticationContext from "../contexts/AuthenticationContext"
 
@@ -72,6 +72,8 @@ function TimeboxList() {
 
     };
 
+
+
     const handleCreateTimebox = (item) => {
         this.addTimebox(item)
     };
@@ -82,19 +84,11 @@ function TimeboxList() {
                 CreateTimebox={handleCreateTimebox} />
             {state.loading ? "Ładuję listę zadań" : null}
             {state.error ? "Coś poszło nie tak" : null}
-            {this.state.timeboxes.map((item, index) => (
-                <Timebox
-                    key={item.id}
-                    onEdit={this.updateTimebox}
-                    onDelete={() => this.removeTimebox(index)}
-                    title={item.title}
-                    totalTimes={item.totalTimes}
-                    confirmChanges={this.handleDisabled}
-                    disabledButton={this.state.disabledButton}
-                    item={item}
-                    index={index}
-                />
-            ))}
+            <TaskList
+                timeboxes={state.timeboxes}
+                TaskDelete={removeTimebox}
+                TaskEdit={updateTimebox} />
+
         </>
     );
 
@@ -103,3 +97,4 @@ function TimeboxList() {
 // TimeboxList.contextType = AuthenticationContext
 
 export default TimeboxList;
+
